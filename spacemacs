@@ -158,5 +158,13 @@ layers configuration."
   (global-linum-mode);show line numbers by default
 )
 
+(setq
+ ;; use gdb-many-windows by default
+ gdb-many-windows t
+
+ ;; non nil means display source file containing the main routine at startup
+ gdb-show-main t
+ )
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
