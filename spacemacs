@@ -37,17 +37,20 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     ;; auto-completion
-     ;; better-defaults
+     auto-completion
+     better-defaults
      c-c++
      emacs-lisp
      git
+     gtags
      markdown
+     games
      ;; org
      python
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
+     semantic
      spell-checking
      syntax-checking
      version-control
@@ -119,8 +122,8 @@ values."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+   dotspacemacs-startup-lists '((recents . 25)
+                                (projects . 27))
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
@@ -267,7 +270,7 @@ values."
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-smart-closing-parenthesis t
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -288,7 +291,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup t
+   dotspacemacs-whitespace-cleanup changed
    ))
 
 (defun dotspacemacs/user-init ()
@@ -307,5 +310,17 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (setq-default evil-escape-key-sequence "jk")
+  (setq-default evil-escape-key-sequence "kj")
+  (define-key evil-normal-state-map "H" "^")
+  (define-key evil-normal-state-map "L" "$")
+  (define-key evil-visual-state-map "H" "^")
+  (define-key evil-visual-state-map "L" "$")
+
+  (define-key evil-normal-state-map (kbd "TAB") "\C-o")
+
+  ;;(spacemacs/gtags-define-keys-for-mode 'c-mode)
+  (spacemacs/helm-gtags-define-keys-for-mode 'c-mode)
+
   )
 
